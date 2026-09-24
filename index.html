@@ -85,6 +85,10 @@ nav .cpt{margin-left:auto;font-size:11px;font-weight:400;letter-spacing:.08em;co
 footer{border-top:1px solid #000;padding:24px 0 8px;font-size:13px;letter-spacing:-.02em}
 footer p{margin-bottom:10px;max-width:40em}
 .sig{font-weight:500}
+.canaux{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px}
+.canaux a{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  border-bottom:1px solid #000;padding:6px 0;position:relative}
+.canaux a::after{content:"";position:absolute;inset:-10px -6px}
 .legal{font-size:11px;line-height:1.5;color:#767676;letter-spacing:0;margin-top:22px;max-width:46em}
 
 /* barre */
@@ -110,7 +114,7 @@ footer p{margin-bottom:10px;max-width:40em}
   en modèle d’essayage. Vous les essayez, vous choisissez la vôtre — elle est ensuite coupée à vos
   mesures et fabriquée à Montréal en sept à dix jours.</p>
   <p class="ban"><span>Essai gratuit</span> · <span>60 min</span> · <span>Sans obligation</span>
-  · <span>283 Notre-Dame O.</span></p>
+  · <span>Sur mesure intégral</span> · <span>283 Notre-Dame O.</span></p>
 </header>
 </div>
 
@@ -371,19 +375,25 @@ footer p{margin-bottom:10px;max-width:40em}
 </div>
 
 <dl>
-  <div><dt>Taille</dt><dd>Aucune à choisir. Vous essayez le modèle d’atelier, la vôtre est coupée sur vous.</dd></div>
+  <div><dt>Sur mesure</dt><dd>Chaque pièce réalisée avec moi est coupée à vos mesures. Il n’y a pas de taille à choisir.</dd></div>
   <div><dt>Rendez-vous</dt><dd>Gratuit, sans obligation d’achat. Comptez une heure.</dd></div>
+  <div><dt>Hors Montréal</dt><dd>Nous prenons vos mesures à distance, par Zoom. Vous n’avez pas besoin de vous déplacer.</dd></div>
   <div><dt>Délai</dt><dd>Fabrication à Montréal, sept à dix jours après la prise de mesures.</dd></div>
   <div><dt>Prix</dt><dd>Le prix affiché est celui de la pièce, taxes en sus.</dd></div>
-  <div><dt>Sur mesure</dt><dd>Une pièce coupée sur vous n’est ni échangeable ni remboursable.</dd></div>
+  <div><dt>Paiement</dt><dd>Réglé en totalité à la commande. C’est la condition pour lancer une coupe qui n’existe que pour vous.</dd></div>
+  <div><dt>Retouches</dt><dd>Incluses. Une fois la pièce livrée, on l’ajuste autant qu’il le faut.</dd></div>
   <div><dt>Essayage</dt><dd><a href="https://maps.google.com/?q=283+rue+Notre-Dame+Ouest+Montreal" target="_blank" rel="noopener" style="border-bottom:1px solid #000">283, rue Notre-Dame Ouest, Montréal</a></dd></div>
 </dl>
 
 <footer>
   <p class="sig">Pedro Tobia</p>
   <p>Designer de la collection RADICE pour Maison Godefroi. Je reçois moi-même au 283, rue
-  Notre-Dame Ouest, et je réponds depuis mon compte personnel, <b>@pdronino</b>.</p>
+  Notre-Dame Ouest.</p>
   <p>Écrivez-moi la pièce qui vous intéresse — je vous propose deux moments.</p>
+  <p class="canaux">
+    <a href="https://wa.me/33620245822" target="_blank" rel="noopener">WhatsApp +33 6 20 24 58 22</a>
+    <a href="https://ig.me/m/pdronino" target="_blank" rel="noopener">Instagram @pdronino</a>
+  </p>
   <p class="legal">Les renseignements que vous transmettez servent uniquement à fixer votre
   rendez-vous. Ils sont recueillis pour le compte de Maison Godefroi, responsable de leur
   traitement, et ne sont ni vendus ni utilisés à des fins publicitaires. Pour y accéder, les
@@ -392,7 +402,7 @@ footer p{margin-bottom:10px;max-width:40em}
 </div>
 
 <div class="bar" id="bar">
-  <a id="lien" href="https://ig.me/m/pdronino" target="_blank" rel="noopener">
+  <a id="lien" href="https://wa.me/33620245822" target="_blank" rel="noopener">
     <span id="btxt">Écrire à Pedro — rendez-vous gratuit</span>
     <span class="sel" id="bsel"></span>
   </a>
@@ -400,7 +410,7 @@ footer p{margin-bottom:10px;max-width:40em}
 
 <script>
 (function(){
-  var IG = "pdronino";
+  var WA = "33620245822";
   var g = document.getElementById("g"),
       bar = document.getElementById("bar"),
       lien = document.getElementById("lien"),
@@ -449,7 +459,7 @@ footer p{margin-bottom:10px;max-width:40em}
     if (!choix.length){
       btxt.textContent = "Écrire à Pedro — rendez-vous gratuit";
       bsel.textContent = "";
-      lien.href = "https://ig.me/m/" + IG + "?text=" +
+      lien.href = "https://wa.me/" + WA + "?text=" +
         encodeURIComponent("Bonjour Pedro (Maison Godefroi), j’aimerais prendre rendez-vous pour essayer la collection RADICE.");
       return;
     }
@@ -457,7 +467,7 @@ footer p{margin-bottom:10px;max-width:40em}
     bsel.textContent = choix.join(", ");
     var msg = "Bonjour Pedro (Maison Godefroi), j’aimerais essayer " + choix.join(", ") +
               " de la collection RADICE." + (post ? " (" + post + ")" : "");
-    lien.href = "https://ig.me/m/" + IG + "?text=" + encodeURIComponent(msg);
+    lien.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
   }
 
   g.addEventListener("click", function(e){
