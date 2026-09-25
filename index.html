@@ -96,8 +96,6 @@ footer p{margin-bottom:10px;max-width:40em}
 .legal{font-size:11px;line-height:1.5;color:#767676;letter-spacing:0;margin-top:22px;max-width:46em}
 
 /* --- mouvement, budget strict --- */
-.js .p{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease}
-.js .p.in{opacity:1;transform:none}
 .p img{opacity:0;transition:opacity .3s ease}
 .p img.ld{opacity:1}
 .s{transition:background .12s ease,color .12s ease,transform .09s ease}
@@ -106,7 +104,6 @@ footer p{margin-bottom:10px;max-width:40em}
 .g{transition:opacity .15s ease}
 .g.filtrage{opacity:.35}
 @media(prefers-reduced-motion:reduce){
-  .js .p{opacity:1;transform:none;transition:none}
   .p img{opacity:1;transition:none}
   *{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
@@ -488,17 +485,6 @@ dialog:not([open]){display:none}
   var q = new URLSearchParams(location.search);
   var post = q.get("post") || "";
 
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-      });
-    }, { rootMargin: "0px 0px -40px" });
-    cartes.forEach(function (c) { io.observe(c); });
-  } else {
-    cartes.forEach(function (c) { c.classList.add("in"); });
-  }
-
   [].forEach.call(g.querySelectorAll("img"), function (im) {
     if (im.complete && im.naturalWidth) im.classList.add("ld");
     else im.addEventListener("load", function () { im.classList.add("ld"); }, { once: true });
@@ -588,12 +574,18 @@ dialog:not([open]){display:none}
     vfiche.href = carte.querySelector(".fiche").href;
     libelle(carte);
     vue.showModal();
+    vue.scrollTop = 0;
     document.body.style.overflow = "hidden";
+  }
+  function fermer() {
+    document.body.style.overflow = "";
+    if (vue.open) vue.close();
   }
   if (vue) {
     vue.addEventListener("close", function () { document.body.style.overflow = ""; });
-    vue.addEventListener("click", function (e) { if (e.target === vue) vue.close(); });
-    document.getElementById("vclose").addEventListener("click", function () { vue.close(); });
+    vue.addEventListener("cancel", function () { document.body.style.overflow = ""; });
+    vue.addEventListener("click", function (e) { if (e.target === vue) fermer(); });
+    document.getElementById("vclose").addEventListener("click", fermer);
     vaj.addEventListener("click", function () {
       if (!courante) return;
       bascule(courante);
